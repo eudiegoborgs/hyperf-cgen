@@ -1,0 +1,26 @@
+version: '3.5'
+services:
+  image: &base
+    container_name: hyperf.cgen
+    image: hyperf.cgen
+    volumes:
+      - ./:/opt/www
+    build:
+      context: .
+      args:
+        APP_ENV: dev
+
+  composer:
+    <<: *base
+    profiles:
+      - composer
+    container_name: composer
+    entrypoint: composer
+    command: validate
+
+  sh:
+    <<: *base
+    profiles:
+      - sh
+    container_name: sh
+    entrypoint: sh

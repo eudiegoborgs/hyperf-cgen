@@ -11,6 +11,8 @@ declare(strict_types=1);
  */
 namespace CyBorgs\Hyperf\CGen;
 
+use CyBorgs\Hyperf\CGen\Commands\CreateCommand;
+
 class ConfigProvider
 {
     public function __invoke(): array
@@ -19,6 +21,7 @@ class ConfigProvider
             'dependencies' => [
             ],
             'commands' => [
+                CreateCommand::class
             ],
             'annotations' => [
                 'scan' => [
@@ -27,7 +30,6 @@ class ConfigProvider
                     ],
                 ],
             ],
-            'commands' => [],
             'publish' => [
                 [
                     'id' => 'config',

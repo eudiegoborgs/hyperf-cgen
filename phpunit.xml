@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         bootstrap="tests/bootstrap.php"
-         backupGlobals="false"
-         colors="true"
-         processIsolation="false"
-         stopOnFailure="false"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd"
-         cacheDirectory=".phpunit.cache"
-         backupStaticProperties="false"
+<phpunit
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        bootstrap="tests/bootstrap.php"
+        backupGlobals="false"
+        colors="true"
+        processIsolation="false"
+        stopOnFailure="false"
+        testdox="true"
+        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.4/phpunit.xsd"
+        cacheDirectory=".phpunit.cache"
+        backupStaticProperties="false"
 >
-    <testsuite name="Testsuite">
-        <directory>./tests/</directory>
-    </testsuite>
+  <coverage>
+    <report>
+      <html outputDirectory="tests/reports/coverage"/>
+      <clover outputFile="tests/reports/clover.xml"/>
+    </report>
+  </coverage>
+  <testsuite name="Testsuite">
+    <directory>./tests/</directory>
+  </testsuite>
+  <source>
+    <include>
+      <directory suffix=".php">./src</directory>
+    </include>
+    <exclude>
+      <directory suffix=".php">./src/Custom</directory>
+      <directory suffix=".php">./src/OtherCustom</directory>
+    </exclude>
+  </source>
 </phpunit>
