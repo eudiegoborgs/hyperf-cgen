@@ -4,6 +4,11 @@ CGen is a Custom Class Generator library to optimize your hyperf development exp
 
 If you use this library, you can make stub for your classes and create code structure with only one command.
 
+[![Latest Stable Version](http://poser.pugx.org/eudiegoborgs/hyperf-cgen/v)](https://packagist.org/packages/eudiegoborgs/hyperf-cgen) 
+[![Total Downloads](http://poser.pugx.org/eudiegoborgs/hyperf-cgen/downloads)](https://packagist.org/packages/eudiegoborgs/hyperf-cgen)
+[![License](http://poser.pugx.org/eudiegoborgs/hyperf-cgen/license)](https://packagist.org/packages/eudiegoborgs/hyperf-cgen) 
+[![PHP Version Require](http://poser.pugx.org/eudiegoborgs/hyperf-cgen/require/php)](https://packagist.org/packages/eudiegoborgs/hyperf-cgen)
+
 ## Installation
 
 ```
