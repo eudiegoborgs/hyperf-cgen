@@ -1,6 +1,8 @@
 /.idea
 /vendor/
 /tests/reports/
+/src/Custom/
+/src/OtherCustom/
 composer.lock
 *.cache
 *.log

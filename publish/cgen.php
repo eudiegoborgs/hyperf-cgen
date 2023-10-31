@@ -4,22 +4,24 @@ declare(strict_types=1);
 
 return [
     'generator' => [
-        'example_type' => [
-            'namespace' => 'App\\Example\\Namespace',
-            'stub' => 'path/to/real/stub/example_type.stub',
-            'interface' => [
-                'namespace' => 'App\\Example\\Namespace\\{CLASS}\\Interfaces',
-                'stub' => 'path/to/real/stub/example_type_interface.stub',
-                'suffix' => 'Interface',
-            ],
-            // 'extends' => ClassName::class,
-            'run_previous' => 'other_type'
+        'test_type' => [
+            'namespace' => 'CyBorgs\\Hyperf\\CGen\\Custom',
+            'stub' => __DIR__ . '/stubs/class.stub',
+            'run_previous' => [
+                'other_type',
+                'interface'
+            ]
         ],
         'other_type' => [
-            'namespace' => 'App\\Example\\OtherNamespace',
-            'stub' => 'path/to/real/stub/other_type.stub',
+            'namespace' => 'CyBorgs\\Hyperf\\CGen\\OtherCustom',
+            'stub' => __DIR__ . '/stubs/other_class.stub',
             'prefix' => 'Prefix',
             'suffix' => 'Suffix',
+        ],
+        'interface' => [
+            'namespace' => 'CyBorgs\\Hyperf\\CGen\\Custom\\%CLASS%\\Interfaces',
+            'stub' => __DIR__ . '/stubs/interface.stub',
+            'suffix' => 'Interface',
         ],
     ],
     'default' => [

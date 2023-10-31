@@ -9,6 +9,6 @@ use %other_type.NAMESPACE%\%other_type.CLASS%;
 class %CLASS%
 {
     public function __construct(
-        private %other_type.CLASS% $otherType
+        private %other_type.CLASS% %other_type.VARIABLE_NAME%
     ) {}
 }

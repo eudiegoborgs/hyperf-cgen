@@ -29,13 +29,13 @@ class CreateCommand extends Command
 
     public function handle()
     {
-        try {
+//        try {
             $type = $this->input->getArgument('type');
             $this->build($type);
-        } catch (\Exception $exception) {
-            $this->output->writeln(sprintf('<fg=red>%s</>', $exception->getMessage()));
-            return 0;
-        }
+//        } catch (\Exception $exception) {
+//            $this->output->writeln(sprintf('<fg=red>%s</>', $exception->getMessage()));
+//            return 0;
+//        }
 
         $this->output->writeln('<success>Finish with success</success>');
         return 0;
@@ -151,16 +151,32 @@ class CreateCommand extends Command
         );
     }
 
+    protected function replaceVariableName(
+        string $stub_data,
+        ClassConfig $class_config,
+        string $name_key = '%VARIABLE_NAME%'
+    ): string {
+        $variable_name = $class_config->getVariableName();
+        return str_replace(
+            [$name_key],
+            ["$" . $variable_name],
+            $stub_data
+        );
+    }
+
     /**
      * Build the class with the given name.
      */
     protected function buildClass(ClassConfig $class_config, array $run_previous = []): string
     {
+        var_dump($class_config->getStub());
         $stub = file_get_contents($class_config->getStub());
         $stub = $this->replaceNamespace($stub, $class_config);
+        $stub = $this->replaceVariableName($stub, $class_config);
         foreach ($run_previous as $key => $item) {
             $stub = $this->replaceNamespace($stub, $item, "%{$key}.NAMESPACE%");
             $stub = $this->replaceClassName($stub, $item, "%{$key}.CLASS%");
+            $stub = $this->replaceVariableName($stub, $item, "%{$key}.VARIABLE_NAME%");
         }
         return $this->replaceClassName($stub, $class_config);
     }

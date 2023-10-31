@@ -33,24 +33,31 @@ declare(strict_types=1);
 return [
     'generator' => [
         'example_type' => [
-            'namespace' => 'App\\Example\\Namespace',
-            'stub' => 'path/to/real/stub/example_type.stub',
-            'interface' => [
-                'namespace' => 'App\\Example\\Namespace\\{CLASS}\\Interfaces',
-                'stub' => 'path/to/real/stub/example_type_interface.stub',
-                'suffix' => 'Interface',
-            ],
-            'extends' => ClassName::class,
-            'run_previous' => 'other_type'
+            'namespace' => 'CyBorgs\\Hyperf\\CGen\\Custom',
+            'stub' => __DIR__ . '/stubs/class.stub',
+            'run_previous' => [
+                'other_type',
+                'interface'
+            ]
         ],
         'other_type' => [
-            'namespace' => 'App\\Example\\OtherNamespace',
-            'stub' => 'path/to/real/stub/other_type.stub',
+            'namespace' => 'CyBorgs\\Hyperf\\CGen\\OtherCustom',
+            'stub' => __DIR__ . '/stubs/other_class.stub',
             'prefix' => 'Prefix',
             'suffix' => 'Suffix',
         ],
+        'interface' => [
+            'namespace' => 'CyBorgs\\Hyperf\\CGen\\Custom\\%CLASS%\\Interfaces',
+            'stub' => __DIR__ . '/stubs/interface.stub',
+            'suffix' => 'Interface',
+        ],
     ],
+    'default' => [
+        'stub' => 'path/to/real/stub/example_type.stub',
+        'namespace' => 'App\\Example\\Default'
+    ]
 ];
+
 ```
 
 ### Create stub files
@@ -58,8 +65,8 @@ return [
 This is a stub for other type:
 
 ```php
-<?php
 // path/to/real/stub/other_type.stub
+<?php
 
 declare(strict_types=1);
 
@@ -67,7 +74,7 @@ namespace %NAMESPACE%;
 
 class %CLASS%
 {
-    
+
 }
 ```
 
@@ -75,8 +82,8 @@ class %CLASS%
 This is a stub for example type interface:
 
 ```php
-<?php
 // path/to/real/stub/example_type_interface.stub
+<?php
 
 declare(strict_types=1);
 
@@ -84,24 +91,26 @@ namespace %NAMESPACE%;
 
 interface %CLASS%
 {
-    
+
 }
 ```
 
 This is a stub for example type:
 
 ```php
-<?php
 // path/to/real/stub/example_type_interface.stub
+<?php
 
 declare(strict_types=1);
 
 namespace %NAMESPACE%;
 
+use %other_type.NAMESPACE%\%other_type.CLASS%;
+
 class %CLASS%
 {
     public function __construct(
-        private readonly %RUN_PREVIOUS_RESULT_CLASS% %RUN_PREVIOUS_RESULT_VAR_NAME% 
+        private %other_type.CLASS% %other_type.VARIABLE_NAME%
     ) {}
 }
 ```
@@ -133,7 +142,7 @@ Show the PrefixMyClassNameSuffix.php file
 
 declare(strict_types=1);
 
-namespace App\Example\OtherNamespace;
+namespace CyBorgs\Hyperf\CGen\OtherCustom;
 
 class PrefixMyClassNameSuffix
 {
@@ -147,7 +156,7 @@ Show the MyClassNameInterface.php file
 
 declare(strict_types=1);
 
-namespace App\Example\Namespace\MyClassName\Interfaces;
+namespace CyBorgs\Hyperf\CGen\Custom\MyClassName\Interfaces;
 
 class MyClassNameInterface
 {
@@ -161,15 +170,14 @@ Show the MyClassName.php file
 
 declare(strict_types=1);
 
-namespace App\Example\Namespace;
+namespace CyBorgs\Hyperf\CGen\Custom;
 
-use App\ClassName;
-use App\Example\Namespace\MyClassName\Interfaces\MyClassNameInterface;
+use CyBorgs\Hyperf\CGen\OtherCustom\PrefixMyClassNameSuffix;
 
-class MyClassNameInterface extends ClassName implements MyClassNameInterface
+class MyClassName
 {
     public function __construct(
-        private readonly PrefixMyClassNameSuffix $prefixMyClassNameSuffix 
+        private PrefixMyClassNameSuffix $classTest
     ) {}
 }
 ```

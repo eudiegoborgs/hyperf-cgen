@@ -43,6 +43,11 @@ class ClassConfig
         return str_replace('/', '', ltrim($this->name, '\\/'));
     }
 
+    public function getVariableName(): string
+    {
+        return lcfirst($this->getName());
+    }
+
     /**
      * @param string $name
      */

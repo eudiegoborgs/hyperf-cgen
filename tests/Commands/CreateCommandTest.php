@@ -39,7 +39,6 @@ class CreateCommandTest extends TestCase
                 'cgen.generator.test_type' => [
                     'namespace' => 'CyBorgs\\Hyperf\\CGen\\Custom',
                     'stub' => __DIR__ . '/stubs/class.stub',
-                    'extends' => ClassConfig::class,
                     'run_previous' => [
                         'other_type',
                         'interface'
