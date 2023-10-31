@@ -89,7 +89,7 @@ class CreateCommand extends BaseCommand
 
     protected function isOverwriteEnable(): bool
     {
-        return (bool) $this->input->getArgument('force');
+        return (bool) $this->input->getOption('force');
     }
 
     /**
