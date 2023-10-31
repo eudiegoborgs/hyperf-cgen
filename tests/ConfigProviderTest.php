@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\CyBorgs\Hyperf\CGen;
 
 use CyBorgs\Hyperf\CGen\Commands\CreateCommand;
+use CyBorgs\Hyperf\CGen\Commands\ListCommand;
 use CyBorgs\Hyperf\CGen\ConfigProvider;
 use PHPUnit\Framework\TestCase;
 
@@ -15,7 +16,8 @@ class ConfigProviderTest extends TestCase
     {
         $config = (new ConfigProvider())();
         $this->assertEquals([
-            CreateCommand::class
+            CreateCommand::class,
+            ListCommand::class,
         ], $config['commands']);
         $this->assertEquals([
             [

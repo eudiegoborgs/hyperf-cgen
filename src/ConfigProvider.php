@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace CyBorgs\Hyperf\CGen;
 
 use CyBorgs\Hyperf\CGen\Commands\CreateCommand;
+use CyBorgs\Hyperf\CGen\Commands\ListCommand;
 
 class ConfigProvider
 {
@@ -21,7 +22,8 @@ class ConfigProvider
             'dependencies' => [
             ],
             'commands' => [
-                CreateCommand::class
+                CreateCommand::class,
+                ListCommand::class,
             ],
             'annotations' => [
                 'scan' => [
