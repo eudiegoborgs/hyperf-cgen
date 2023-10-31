@@ -11,12 +11,6 @@
         cacheDirectory=".phpunit.cache"
         backupStaticProperties="false"
 >
-  <coverage>
-    <report>
-      <html outputDirectory="tests/reports/coverage"/>
-      <clover outputFile="tests/reports/clover.xml"/>
-    </report>
-  </coverage>
   <testsuite name="Testsuite">
     <directory>./tests/</directory>
   </testsuite>
