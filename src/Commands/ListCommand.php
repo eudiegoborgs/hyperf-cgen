@@ -16,7 +16,7 @@ class ListCommand extends BaseCommand
     {
         $this->output->writeln("List of configured types:");
         foreach ($this->getConfig('generator') as $key => $item) {
-            $this->output->writeln("<success>{$key}: {$item['namespace']}</success>");
+            $this->output->writeln("<info>{$key}: {$item['namespace']}</info>");
         }
         $this->output->writeln("If you need create more, change generator key on config/autoload/cgen.php");
         return 0;
