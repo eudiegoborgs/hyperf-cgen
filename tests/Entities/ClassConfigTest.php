@@ -1,12 +1,24 @@
 <?php
 
 declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ */
 
 namespace Tests\CyBorgs\Hyperf\CGen\Entities;
 
 use CyBorgs\Hyperf\CGen\Entities\ClassConfig;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class ClassConfigTest extends TestCase
 {
     private ClassConfig $classConfig;
@@ -37,4 +49,3 @@ class ClassConfigTest extends TestCase
         $this->assertEquals('PrefixTestClassSuffix', $this->classConfig->getSanitizedClassName());
     }
 }
-

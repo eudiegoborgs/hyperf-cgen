@@ -1,6 +1,14 @@
 <?php
 
 declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ */
 
 namespace CyBorgs\Hyperf\CGen\Commands;
 
@@ -32,7 +40,6 @@ abstract class BaseCommand extends Command
             $this->addOption(...$option);
         }
     }
-
 
     protected function getConfig(string $key): array
     {

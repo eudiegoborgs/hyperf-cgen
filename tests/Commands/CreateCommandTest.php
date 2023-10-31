@@ -1,11 +1,18 @@
 <?php
 
 declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ */
 
 namespace Tests\CyBorgs\Hyperf\CGen\Commands;
 
 use CyBorgs\Hyperf\CGen\Commands\CreateCommand;
-use CyBorgs\Hyperf\CGen\Entities\ClassConfig;
 use Hyperf\Context\ApplicationContext;
 use Hyperf\Contract\ConfigInterface;
 use PHPUnit\Framework\TestCase;
@@ -13,20 +20,23 @@ use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class CreateCommandTest extends TestCase
 {
-
     public function testExecute()
     {
         $inputData = [
             'type' => 'test_type',
             'name' => 'ClassTest',
-            'force' => true
+            'force' => true,
         ];
         $input = $this->createMock(InputInterface::class);
         $input->expects($this->any())
             ->method('getArgument')
-            ->willReturnCallback(fn($key) => $inputData[$key] ?? null);
+            ->willReturnCallback(fn ($key) => $inputData[$key] ?? null);
         $input->expects($this->any())
             ->method('getArguments')
             ->willReturn($inputData);
@@ -35,14 +45,14 @@ class CreateCommandTest extends TestCase
         $config = $this->createMock(ConfigInterface::class);
         $config->expects($this->any())
             ->method('get')
-            ->willReturnCallback(fn ($key) => match($key) {
+            ->willReturnCallback(fn ($key) => match ($key) {
                 'cgen.generator.test_type' => [
                     'namespace' => 'CyBorgs\\Hyperf\\CGen\\Custom',
                     'stub' => __DIR__ . '/stubs/class.stub',
                     'run_previous' => [
                         'other_type',
-                        'interface'
-                    ]
+                        'interface',
+                    ],
                 ],
                 'cgen.generator.other_type' => [
                     'namespace' => 'CyBorgs\\Hyperf\\CGen\\OtherCustom',
@@ -73,4 +83,3 @@ class CreateCommandTest extends TestCase
         $command->run($input, $output);
     }
 }
-

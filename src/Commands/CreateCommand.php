@@ -1,18 +1,26 @@
 <?php
 
 declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ */
 
 namespace CyBorgs\Hyperf\CGen\Commands;
 
 use CyBorgs\Hyperf\CGen\Entities\ClassConfig;
 use CyBorgs\Hyperf\CGen\Exceptions\CannotCreateClassException;
+use Exception;
 use Hyperf\Utils\Str;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
 class CreateCommand extends BaseCommand
 {
-
     public function __construct()
     {
         parent::__construct('create');
@@ -20,15 +28,15 @@ class CreateCommand extends BaseCommand
 
     public function handle()
     {
-       try {
+        try {
             $type = $this->input->getArgument('type');
             $this->build($type);
-       } catch (\Exception $exception) {
-           $this->output->writeln(sprintf('<fg=red>%s</>', $exception->getMessage()));
-           return 0;
-       }
+        } catch (Exception $exception) {
+            $this->output->writeln(sprintf('<fg=red>%s</>', $exception->getMessage()));
+            return 0;
+        }
 
-        $this->output->writeln('<info>Finish with success</info>');
+         $this->output->writeln('<info>Finish with success</info>');
         return 0;
     }
 
@@ -79,7 +87,7 @@ class CreateCommand extends BaseCommand
 
     protected function cannotWriteFile(ClassConfig $class_config): bool
     {
-        return !$this->isOverwriteEnable() && $this->thisClassAlreadyExists($class_config);
+        return ! $this->isOverwriteEnable() && $this->thisClassAlreadyExists($class_config);
     }
 
     protected function thisClassAlreadyExists(ClassConfig $class_config): bool
@@ -139,7 +147,7 @@ class CreateCommand extends BaseCommand
         $variable_name = $class_config->getVariableName();
         return str_replace(
             [$name_key],
-            ["$" . $variable_name],
+            ['$' . $variable_name],
             $stub_data
         );
     }
