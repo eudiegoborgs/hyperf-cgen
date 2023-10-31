@@ -6,36 +6,27 @@ namespace CyBorgs\Hyperf\CGen\Commands;
 
 use CyBorgs\Hyperf\CGen\Entities\ClassConfig;
 use CyBorgs\Hyperf\CGen\Exceptions\CannotCreateClassException;
-use Hyperf\Command\Command;
-use Hyperf\Context\ApplicationContext;
-use Hyperf\Contract\ConfigInterface;
 use Hyperf\Utils\Str;
-use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class CreateCommand extends Command
+class CreateCommand extends BaseCommand
 {
-    /**
-     * @var ConfigInterface|mixed
-     */
-    private ConfigInterface $config;
 
     public function __construct()
     {
-        $this->config = $this->getContainer()->get(ConfigInterface::class);
-        parent::__construct('cgen:create');
+        parent::__construct('create');
     }
 
     public function handle()
     {
-//        try {
+       try {
             $type = $this->input->getArgument('type');
             $this->build($type);
-//        } catch (\Exception $exception) {
-//            $this->output->writeln(sprintf('<fg=red>%s</>', $exception->getMessage()));
-//            return 0;
-//        }
+       } catch (\Exception $exception) {
+           $this->output->writeln(sprintf('<fg=red>%s</>', $exception->getMessage()));
+           return 0;
+       }
 
         $this->output->writeln('<success>Finish with success</success>');
         return 0;
@@ -65,12 +56,6 @@ class CreateCommand extends Command
         return $class_config;
     }
 
-    protected function getConfig(string $key): array
-    {
-        $key = "cgen.{$key}";
-        return $this->config->get($key) ?? [];
-    }
-
     protected function getCustomConfig(string $type): array
     {
         $key = 'generator.' . Str::snake($type, '.');
@@ -80,11 +65,6 @@ class CreateCommand extends Command
     protected function getDefaultConfig(): array
     {
         return $this->getConfig('default');
-    }
-
-    protected function getContainer(): ContainerInterface
-    {
-        return ApplicationContext::getContainer();
     }
 
     protected function generateClassConfig(string $type): ClassConfig
