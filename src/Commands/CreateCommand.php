@@ -15,7 +15,7 @@ namespace CyBorgs\Hyperf\CGen\Commands;
 use CyBorgs\Hyperf\CGen\Entities\ClassConfig;
 use CyBorgs\Hyperf\CGen\Exceptions\CannotCreateClassException;
 use Exception;
-use Hyperf\Utils\Str;
+use Hyperf\Stringable\Str;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 

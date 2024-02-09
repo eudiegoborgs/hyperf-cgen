@@ -30,17 +30,6 @@ abstract class BaseCommand extends Command
         parent::__construct("cgen:{$command_key}");
     }
 
-    public function configure()
-    {
-        foreach ($this->getArguments() as $argument) {
-            $this->addArgument(...$argument);
-        }
-
-        foreach ($this->getOptions() as $option) {
-            $this->addOption(...$option);
-        }
-    }
-
     protected function getConfig(string $key): array
     {
         $key = "cgen.{$key}";
