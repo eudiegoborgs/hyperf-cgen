@@ -15,5 +15,5 @@ jobs:
     - name: Publish a composer package
       uses: better-php-actions/publish-composer-package@v1
         with:
-          package_slug: "your-package-slug"
-          package_name: "Your Package Name"
+          package_slug: "eudiegoborgs/hyperf-cgen"
+          package_name: "Hyperf CGen Class Generator"
