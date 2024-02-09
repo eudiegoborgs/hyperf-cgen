@@ -36,7 +36,7 @@ class CreateCommand extends BaseCommand
             return 0;
         }
 
-         $this->output->writeln('<info>Finish with success</info>');
+        $this->output->writeln('<info>Finish with success</info>');
         return 0;
     }
 
